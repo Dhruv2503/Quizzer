@@ -4,7 +4,7 @@ const testSchema = new mongoose.Schema({
     testadmin: {
         type:  mongoose.Schema.Types.ObjectId,
         rel:'admin',
-        required: true,
+        required: true
     },
     testname: {
         type: String,

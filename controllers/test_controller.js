@@ -20,7 +20,6 @@ module.exports.create=function(req,res){
                     if(err){console.log("NOT found user"); return}
                     console.log("User found");
                     if(user){
-                        console.log("not able to push")
                         user.alltest.push(newtest.id);
                         user.save();
                         return res.render('create-test-form',{
@@ -63,4 +62,56 @@ module.exports.addquestion=function(req,res){
     }
 
     return res.redirect('/admin');
+}
+
+module.exports.givetest= async function(req,res){
+//     test.findById(req.params.id,function(err,mytest){
+//         if(err){ console.log(err); return}
+//         if(!mytest){
+//             return res.render('error');
+//         }else{
+//             test.findById(mytest.id).populate('questions').exec(function(err,finaltest){
+//                 if(err){console.log(err);return;}
+//                 console.log(finaltest);
+//                 return res.render('give-test',{
+//                     usertest : finaltest
+//                 });
+//             });
+// }});
+    let mytest = await test.findById(req.params.id).populate('testadmin');
+    if(!mytest){
+        return res.render("error");
+    }
+    finaltest = []
+        for(single of mytest.questions)
+        {
+            let ques = await question.findById(single);
+            finaltest.push(ques);
+            // console.log(finaltest);
+        }
+        // console.log("before call");
+        // console.log(finaltest.length);
+        return res.render('give-test',{
+                userquestion : finaltest, 
+                usertest : mytest
+        });
+}
+
+module.exports.submit = async function(req,res){
+    console.log(req.body);
+    let score = 0;
+    let name = req.body.username;
+    for(let i=0;i<req.body.noofques;i++)
+    {
+        if(req.body[i][0] === req.body[i][1])
+        {
+            score += Number(req.body[i][2]);
+        }
+    }
+    console.log(score);
+    let mytest = await test.findById(req.body.testid);
+    mytest.participants.push({name,score});
+    mytest.save();
+    return res.render('success');
+
 }

@@ -3,6 +3,7 @@ const test =require('../models/test');
 
 module.exports.home=function(req,res){
     test.find({}).populate('testadmin').exec(function(err,tests){
+        if(err){console.log(err);return;}
         return res.render('adminHome',{
             tests:tests
         });
