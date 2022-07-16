@@ -1,8 +1,8 @@
 <html>
-    <h1>
+    <!-- <h1>
         <%=user.name%>
         <a href="/sign-out">Sign-Out</a>
-    </h1>
+    </h1> -->
 
     <div>
         <%if(locals.admin){%>
@@ -15,16 +15,16 @@
         </form>
         <%}else{%>
             <h1>cannot Create test</h1>
-            <%}%>
+        <%}%>
     </div>
 
-    <div id="all-test-by-admin">
+    <!-- <div id="all-test-by-admin">
         <%if(user.alltest.length!=undefined){%>
         <%for(test of user.alltest){%>
             <h6><%=test.name%></h6>
             <br>
             <a href="/">Detailed Summary</a>
-            <%}%>
-            <%}%>
+        <%}%>
+        <%}%> -->
     </div>
 </html>

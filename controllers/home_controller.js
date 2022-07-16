@@ -69,19 +69,3 @@ module.exports.home = function(req,res){
 }
 
 
-module.exports.givetest=function(req,res){
-    test.findById(req.params.id,function(err,mytest){
-        if(err){ console.log(err); return}
-        if(!mytest){
-            return res.render('error');
-        }else{
-            test.findById(mytest.id).populate('questions').exec(function(err,final){
-                console.log(final);
-                return res.render('give-test',{
-                    usertest:final
-                })
-            });
-        }
-
-    });
-}

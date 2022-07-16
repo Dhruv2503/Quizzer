@@ -1,0 +1,30 @@
+<html>
+    <body>
+        
+        <% if(locals.admin && locals.admin.id == usertest.testadmin){ %>
+            <a href="/" target="_blank"></a>
+        <% }else{ %>
+            <form action="/admin/test/submit" method="post">
+                <input type="text" name="username" required>
+                <input type="hidden" name="testid" value="<%=usertest.id%>">
+                <input type="hidden" name="noofques" value="<%=userquestion.length%>">
+                <%for(let i=0;i<userquestion.length;i++){ %>
+                    <p><%= i+1 %>. &nbsp; <%=  userquestion[i].questionHead %></p>
+                    <ul>
+                    <%for(let j=0;j<userquestion[i].options.length;j++){ %> 
+                        <li>
+                            <input type="radio" name="<%= i %>" value="<%= userquestion[i].options[j] %>" >
+                            <%= userquestion[i].options[j] %>
+                        </li>
+                    <%}%>
+                            <input type="hidden" name="<%= i %>" value="<%= userquestion[i].answer %>" >
+                            <input type="hidden" name="<%= i %>" value="<%= userquestion[i].points %>">
+                    </ul>
+                <%}%>
+
+                <input type="submit" value="Submit Test">
+            </form>
+        <%}%>
+        
+    </body>
+</html>

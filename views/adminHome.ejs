@@ -1,6 +1,6 @@
 <html>
     <%if(locals.admin){%>
-        <a href="/admin/profile/<%= locals.admin.id %>"><%= locals.admin.name %></a>
+        <a href="/admin/profile/<%= locals.admin.id %>">Create Test</a>
         <br>
         <br>
         <a href="/sign-out">Sign-Out</a>
@@ -11,8 +11,26 @@
         <br>
         <br>
         <%for(test of tests){%>
-            <!-- <a href="/<%=test.id%>"><%=test.testname%></a>            ------------------------- -->
-            <p> Participats : <%=test.participants.length%></p>
+            <% if(locals.admin.id == test.testadmin){ %>
+                <p> 
+                    <%= test.testname %>
+                    <br>
+                    Participants : <%= test.participants.length %>
+                    <br>
+                    http://localhost:8000/admin/test/<%= test.id %>
+                    <br>
+                    <ol>
+                        <% for(let i=0;i<test.participants.length;i++){%>
+                            <li>
+                                <%= test.participants[i].name %>
+                                &nbsp; &nbsp;
+                                <%= test.participants[i].score %>
+                            </li>
+                        <%}%>
+                    </ol>
+                    
+                </p>
             <%}%>
+        <%}%>
     
 </html>     

@@ -5,7 +5,6 @@ const router = express.Router();
 const homeController = require('../controllers/home_controller');
 
 router.get('/', homeController.home);
-router.get('/:id',homeController.givetest);
 router.get('/sign-in',homeController.signIn);
 router.get('/sign-up',homeController.signUp);
 router.post('/create',homeController.create);
