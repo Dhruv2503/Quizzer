@@ -6,12 +6,16 @@ const questionSchema = new mongoose.Schema({
         required: true,
     },
     options :[{
-        type: String,
-        required: true
+        type: String
+        // required: true
     }],
     answer:{
         type :String,
         required : true
+    },
+    points:{
+        type :Number,
+        required :true
     }
 }, {
     timestamps: true

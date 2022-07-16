@@ -5,7 +5,6 @@ const testSchema = new mongoose.Schema({
         type:  mongoose.Schema.Types.ObjectId,
         rel:'admin',
         required: true,
-        unique:true
     },
     testname: {
         type: String,

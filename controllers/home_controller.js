@@ -1,4 +1,7 @@
 const admin = require('../models/admin');
+const question=require('../models/question');
+const test=require('../models/test');
+
 const fs = require('fs');
 const path = require('path');
 const passport=require('passport');
@@ -63,4 +66,22 @@ module.exports.destroySession = function(req, res){
 
 module.exports.home = function(req,res){
     return res.render("home");
+}
+
+
+module.exports.givetest=function(req,res){
+    test.findById(req.params.id,function(err,mytest){
+        if(err){ console.log(err); return}
+        if(!mytest){
+            return res.render('error');
+        }else{
+            test.findById(mytest.id).populate('questions').exec(function(err,final){
+                console.log(final);
+                return res.render('give-test',{
+                    usertest:final
+                })
+            });
+        }
+
+    });
 }

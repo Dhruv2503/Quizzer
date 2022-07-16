@@ -12,7 +12,6 @@ passport.use(new LocalStrategy({
     function(req, email, password, done){
         admin.findOne({email: email}, function(err, user)  {
             if (err){
-                req.flash('error', err);
                 return done(err);
             }
 
