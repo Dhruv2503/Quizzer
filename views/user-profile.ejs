@@ -1,0 +1,26 @@
+<html>
+    <h1>
+        <%=user.name%>
+        <a href="/sign-out">Sign-Out</a>
+    </h1>
+
+    <div>
+        <%=if(locals.user)%>
+        <h3>Create a test with unique name</h3>
+        <form action="/admin/test/temp" method="post">
+            <input type="text" name="testname" required placeholder="Test Name">
+            <input type="hidden" name="admin" value="<%=user.id%>">
+            <input type="submit" value="Create">
+        </form>
+        <%}%>
+    </div>
+
+    <div id="all-test-by-admin">
+        <%for(test of user.alltest){%>
+            <h6><%=test.name%></h6>
+            <br>
+            <p><%=test.participants.length%></p>
+            <a href="/">Detailed Summary</a>
+            <%}%>
+    </div>
+</html>

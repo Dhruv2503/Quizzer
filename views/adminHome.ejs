@@ -1,0 +1,18 @@
+<html>
+    <%if(locals.admin){%>
+        <a href="/admin/profile/<%= locals.admin.id %>"><%= locals.admin.name %></a>
+        <br>
+        <br>
+        <a href="/sign-out">Sign-Out</a>
+        <%}%>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <%for(test of tests){%>
+            <a href="/"><%=test.testname%></a>            <!----------------------------->
+            <p> Participats : <%=test.participants.length%></p>
+            <%}%>
+    
+</html>     
