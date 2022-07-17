@@ -1,21 +1,35 @@
 
 <html>
-    <form action="/admin/test/addquestion " method="post">
-        <input type="hidden" name ="testid" value="<%=testid%>">
-        <%for(let i=1;i<=           questions                 ;i++){%>
-            <div id="test-question">
-                <input type="test" name ="question" placeholder="Enter question here" required >
-                <input type="text" name="option1" placeholder="Enter option 1" required>
-                <input type="text" name="option2" placeholder="Enter option 2" required>
-                <input type="text" name="option3" placeholder="Enter option 3" required>
-                <input type="text" name="option4" placeholder="Enter option 4" required>
-                <input type="text" name="correctoption" placeholder="Enter correct option" required>
-                <input type="text" name="points" placeholder="Enter points" required>
-            </div>
-            <br> 
-        <%}%>
-        <input type="submit" value="Add questions">
-    </form>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <form action="/admin/test/addquestion " method="post">
+            <h1>Input all the questions</h1>
+            <input type="hidden" name ="testid" value="<%=testid%>">
+            <%for(let i=1;i<= questions ;i++){%>
+                <div id="test-question">
+                    <%=i%>.
+                    <input class="form-control" type="test" name ="question" placeholder="Enter question here" required >
+                    <input type="text" name="option1" placeholder="Enter option 1" required>
+                    <input type="text" name="option2" placeholder="Enter option 2" required>
+                    <input type="text" name="option3" placeholder="Enter option 3" required>
+                    <input type="text" name="option4" placeholder="Enter option 4" required>
+                    <input type="text" name="correctoption" placeholder="Enter correct option" required>
+                    <input type="number" name="points" placeholder="Enter points" required>
+                </div>
+                <br> 
+            <%}%>
+            <input class="btn btn-primary" type="submit" value="Add questions">
+        </form>
+    </body>
 </html>
 
 

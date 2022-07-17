@@ -26,7 +26,7 @@
             <br>
             <br>
             <br>
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover table-responsive">
                 <thead>
                     <tr >
                         <td>Quiz Name</td>
@@ -37,14 +37,32 @@
                 </thead>
                 <tbody>
                     <%for(test of tests){%>
-                        <% if(locals.admin.id == test.testadmin){ %>
-                            <tr data-toggle="collapse" data-target="#<%= test.testname %>" aria-expanded="false" aria-controls="<%= test.testname %>">
+                        <% if(locals.admin && locals.admin.id == test.testadmin){ %>
+                            <tr  class="accordion-toggle collapsed" data-toggle="collapse" data-target="#<%= test.testname %>" data-parent="#<%= test.testname %>"aria-expanded="false" aria-controls="<%= test.testname %>">
                                 <td><%= test.testname %></td>
                                 <td><%= test.participants.length %></td>
-                                <td>http://localhost:8000/admin/test/<%= test.id %></td>
-                                <td><i class="fa-solid fa-caret-down"></i></td>
+                                <td id="link<%= test.id%>">http://localhost:8000/admin/test/<%= test.id %></td>
+                                <td><button type="button" class="btn btn-primary" onclick="clipboard('<%=test.id %>')">Copy to clipboard</button></td>
+                                <td><button type="button" class="btn btn-primary" >
+                                    <a href="/admin/test/toggle/<%= test.id %>">
+                                        <%if(test.valid){%>
+                                            Disable
+                                        <%}else{%>
+                                            Enable
+                                        <%}%>
+                                    </a>
+                                </button></td>
+
+                                <!-- <td><i class="fa-solid fa-caret-down"></i></td> -->
+                                <%if(test.participants.length>0){%>
+                                <td>
+                                    <button type="button" class="btn btn-primary">
+                                        <a href="/admin/test/summary/<%=test.id%>" >Summary</a>
+                                    </button>
+                                </td>
+                                <%}%>
                             </tr>
-                            <tr class="collapse" id="<%= test.testname %>">
+                            <!-- <tr class="collapse" id="<%= test.testname %>">
                                 <td colspan="4">
                                     <div class="card card-body">
                                         <ol>
@@ -57,10 +75,8 @@
                                         <%}%>
                                         </ol>
                                     </div>
-                                </td>
-                                
-                    
-                            </tr>
+                                </td>                    
+                            </tr> -->
                                              
                                 
                                 
@@ -68,7 +84,7 @@
                     <%}%>
                 </tbody>
             </table>
-            
+            <script src="/js/adminHome.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
             <!-- Latest compiled JavaScript -->

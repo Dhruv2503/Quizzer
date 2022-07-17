@@ -3,16 +3,54 @@
         <%=user.name%>
         <a href="/sign-out">Sign-Out</a>
     </h1> -->
+    <head>
+        
+        <link rel="stylesheet" href="/css/user-profile.css">
+    </head>
 
     <div>
         <%if(locals.admin){%>
-        <h3>Create a test with unique name</h3>
-        <form action="/admin/test/create" method="post">
-            <input type="text" name="name" required placeholder="Test Name">
-            <input type="text" name ="questionNo" required placeholder="Enter the no of question">
-            <input type="hidden" name="testuserid" value="<%=user._id%>">
-            <input type="submit" value="Create">
-        </form>
+            <p class="texto">Create a test with unique name</p>
+            <div class="Registro">
+            <form method="post" action="/admin/test/create">
+
+            <!-- <div class="flex-column flex-center"> -->
+                <input type="text" name ="name" required placeholder="Enter Test Name"> 
+                <input type="number" name ="questionNo" id="email" required placeholder="Enter the no. of question">
+                <input type="datetime-local" name ="start" required> 
+                <input type="datetime-local" name ="end" required>
+                <input type="hidden" name="testuserid" value="<%=user._id%>"> 
+                <input type="submit" value="Create">
+            <!-- </div> -->
+            </form>
+            </div>
+        <!-- <div class="container">
+            <div class="flex-column flex-center">
+            <h2>Create a test with unique name</h2>
+            <form action="/admin/test/create" method="post">
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input class="form-control" type="text" name="name" required placeholder="Enter Test Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input class="form-control" type="number" name ="questionNo" required placeholder="Enter the no. of question">
+                        </div>
+                        <input type="hidden" name="testuserid" value="<%=user._id%>">
+                    
+                        <div class="form-group col-md-6">
+                            <input type="submit" value="Create">
+                        </div>
+                    </div>
+
+                    
+                    
+                    
+                </div>
+                
+            </form>
+            </div>
+        </div> -->
         <%}else{%>
             <h1>cannot Create test</h1>
         <%}%>

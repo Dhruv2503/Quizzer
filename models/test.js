@@ -20,7 +20,19 @@ const testSchema = new mongoose.Schema({
     questions:[{
         type:  mongoose.Schema.Types.ObjectId,
         rel:'question'
-    }]
+    }],
+    valid:{
+        type:Boolean,
+        required:true
+    },
+    startdate:{
+        type: Date ,
+        required:true
+    },
+    duedate:{
+        type: Date ,
+        required:true
+    }
 }, {
     timestamps: true
 });
