@@ -11,8 +11,14 @@ module.exports.create=function(req,res){
         }else{
             test.create({
                 testadmin: req.body.testuserid,
-                testname: req.body.name
+                testname: req.body.name,
+                valid:true,
+                startdate: req.body.start,
+                duedate : req.body.end
             },function(err,newtest){
+                let today = new Date("2020-05-06T00:00:00");
+                console.log(today.getTime());
+                console.log(newtest.duedate.getTime());
                 if(err){ console.log(err); return}
                 console.log("YYYYYY");
                 console.log(req.body);
@@ -100,6 +106,7 @@ module.exports.givetest= async function(req,res){
 module.exports.submit = async function(req,res){
     console.log(req.body);
     let score = 0;
+    let all = 0;
     let name = req.body.username;
     for(let i=0;i<req.body.noofques;i++)
     {
@@ -107,11 +114,37 @@ module.exports.submit = async function(req,res){
         {
             score += Number(req.body[i][2]);
         }
+        all+= Number(req.body[i][2]);
     }
     console.log(score);
     let mytest = await test.findById(req.body.testid);
     mytest.participants.push({name,score});
     mytest.save();
-    return res.render('success');
+    return res.render('success',{
+        myscore : score,
+        total : all
+    });
 
+}
+
+module.exports.summary = async function(req,res){
+    let mytest = await test.findById(req.params.id);
+    if(!mytest){
+        return res.render("error");
+    }
+    else{
+        return res.render("summary",{
+            testsummary : mytest
+        });
+    }
+}
+
+module.exports.toggle = async function(req,res){
+    let mytest = await test.findById(req.params.id);
+    if(!mytest){
+        return res.render("error");
+    }
+    mytest.valid = !mytest.valid;
+    mytest.save();
+    return res.redirect('back');
 }

@@ -12,7 +12,7 @@ module.exports.signUp = function(req, res){
     if (req.isAuthenticated()){
         return res.redirect('/admin')
     }
-
+    
     return res.render('user-sign-up')
 }
 
@@ -43,6 +43,7 @@ module.exports.create = function(req, res){
                 return res.render('user-sign-in');
             })
         }else{
+            
             return res.redirect('back');
         }
 
