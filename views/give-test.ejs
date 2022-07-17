@@ -1,9 +1,6 @@
 <html>
     <body>
         
-        <% if(locals.admin && locals.admin.id == usertest.testadmin){ %>
-            <a href="/" target="_blank"></a>
-        <% }else{ %>
             <form action="/admin/test/submit" method="post">
                 <input type="text" name="username" required>
                 <input type="hidden" name="testid" value="<%=usertest.id%>">
@@ -21,10 +18,13 @@
                             <input type="hidden" name="<%= i %>" value="<%= userquestion[i].points %>">
                     </ul>
                 <%}%>
-
+                <% if(locals.admin && locals.admin.id == usertest.testadmin){ %>
+                    <a href="/admin">Go back to Profile</a>
+                <% }else{ %>
                 <input type="submit" value="Submit Test">
+                <% } %>
             </form>
-        <%}%>
+        
         
     </body>
 </html>
